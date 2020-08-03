@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="https://labs.mysql.com/common/themes/sakila/favicon.ico">
+    <meta charset="UTF-8">
+    <title>sqDit</title>
+
+           <!-- Latest compiled and minified CSS -->
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+           <!-- jQuery library -->
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+       
+           <!-- Popper JS -->
+           <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+       
+           <!-- Latest compiled JavaScript -->
+           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
+           <script src="/socket.io/socket.io.js"></script>
+
+            <script src="public/code_mirror/lib/codemirror.js"></script>
+            <link rel="stylesheet" href="public/code_mirror/lib/codemirror.css">
+            <script src="public/code_mirror/mode/sql/sql.js"></script>
+
+            <style>
+
+                .databases:hover{
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+
+                .db-view{
+                  padding: 0px 9px;
+                  background-repeat: no-repeat;
+                }
+
+                .explorer:hover{
+                  cursor: pointer;
+                }
+
+                .db{
+                  background-image: url(public/img/db.png);
+                }
+
+                .table_{
+                  background-image: url(public/img/table.png);
+                }
+
+                .describe_table{
+                  background-image: url(public/img/describe.png);
+                }
+
+                .show_table{
+                  background-image: url(public/img/show_table.png);
+                }
+
+                .explorer{
+                  margin-right: 10px;
+                }
+
+            </style>
+
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">
+            <img style="padding: 5px 0px;" src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2" width="50" height="50" alt="sqDit">
+          </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"> Configurations <span class="sr-only">(current)</span></a>
+            </li>
+        </div>
+      </nav>
+
+    <div class="container">
+
+        <br />
+        <br />
+
+        <div class="card">
+          <h5 class="card-header">Data Explorer</h5>
+          <p onclick="explorer_back();">Voltar</p>
+          <div class="card-body">
+            
+            <span id="explorer_container">
+
+              </span>
+
+          </div>
+        </div>
+
+        <span id="table_view">
+
+          </span>
+
+        
+
+          <br />
+          <br />
+
+          <div class="card">
+              
+            <h5 class="card-header" id="editing_now">SQL > </h5>
+
+            <div class="card-body" >
+                <button type="button" class="btn btn-success" onclick="execute()" style="border-radius: 0px;
+                  padding: 3px;"> Run </button>
+            </div>
+
+            <div class="card-body" style="margin-top: -10px;">
+                <div id="content" style="margin-top: 10px;border: 1px solid #ccc;margin-bottom: 22px;">
+
+                </div>
+
+            <div class="card">
+                <div class="card-header">
+                  Console
+                </div>
+                <div class="card-body" id="console">
+                  <p class="card-text"> root$ Started </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            
+
+    </div>
+
+    <br />
+    <br />
+
+
+    <script src="public/scripts/index.js"></script>
+</body>
+</html>
