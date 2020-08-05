@@ -6,7 +6,8 @@ let socket = io();
 
 let codemirror = CodeMirror(getID('content'), {
     mode:  "sql",
-    lineNumbers: true
+    lineNumbers: true,
+    theme: "darcula"
   });
 
 const db_select = (_id) =>{
@@ -57,7 +58,7 @@ socket.on('show_databases', (_data)=>{
     add_explorer();
 
     _data.forEach(item => {
-        add_data_explorer_items(item, `db_select('${item}')`, 'db')
+        add_data_explorer_items(item, `show_tables('${item}')`, 'db')
     });
 
 });
@@ -130,7 +131,7 @@ const add_row = (_indx, _field, _type, _null, _key, _default, _extra) =>{
 
 const add_table_rows = () =>{
 
-    let _string = `<table class="table">
+    let _string = `<table class="table table-dark">
     <thead>
         <tr>
         <th scope="col">#</th>
@@ -154,7 +155,7 @@ const add_table_rows = () =>{
 };
 
 const add_table_view = (tb_name) =>{
-    let _str = `<div class="card">
+    let _str = `<div class="card text-white bg-dark">
     <h5 class="card-header"> Index of ${tb_name} </h5>
     <div class="card-body" id="_data">
 
@@ -170,10 +171,24 @@ const table_select = (table_name) =>{
     add_explorer();
     add_data_explorer_items('Index', `describe_table('${table_name}')`, 'describe_table');
     add_data_explorer_items('Content', `show_content('${table_name}')`, 'show_table');
-
-
 };
 
 const describe_table = (_id) =>{
     socket.emit('show_table_content', _id);
 }
+
+//Data-Explorer
+
+const explorer_navbar_index = 0;
+const actual_index = 0;
+
+const navbar_info_index = (_str /*: string*/, _index /*: integer */) => {
+    getID(`navbar_${(_index)}`).className = 'breadcrumb-item';
+    let elem_code = `<li class="breadcrumb-item active" id="navbar_${_index}"> ${_str} </li>`;
+    getID('explorer-navbar').insertAdjacentHTML('beforeend', elem_code);
+};
+
+const show_tables = (_str) => {
+    navbar_info_index('Tables', actual_index);
+    db_select(_str)
+};

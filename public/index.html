@@ -21,6 +21,7 @@
 
             <script src="public/code_mirror/lib/codemirror.js"></script>
             <link rel="stylesheet" href="public/code_mirror/lib/codemirror.css">
+            <link rel="stylesheet" href="https://codemirror.net/theme/darcula.css">
             <script src="public/code_mirror/mode/sql/sql.js"></script>
 
             <style>
@@ -59,12 +60,25 @@
                   margin-right: 10px;
                 }
 
+                .explorer-buttons{
+                  background: #2b3136 !important;
+                  color: #ccc !important;
+                  font-size: 22px;
+                  padding: 0px 9px;
+                  border-radius: 4px;
+                  margin-left: 4px;
+                }
+
+                .explorer-buttons:hover{
+                  cursor: pointer;
+                }
+
             </style>
 
 </head>
-<body>
+<body class="bg-secondary text-white">
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
         <a class="navbar-brand" href="#">
             <img style="padding: 5px 0px;" src="https://labs.mysql.com/common/logos/mysql-logo.svg?v2" width="50" height="50" alt="sqDit">
@@ -87,9 +101,35 @@
         <br />
         <br />
 
-        <div class="card">
-          <h5 class="card-header">Data Explorer</h5>
-          <p onclick="explorer_back();">Voltar</p>
+        <div class="card text-white bg-dark">
+
+          <div class="card-body">
+
+            <ul class="nav">
+
+              <li class="nav-item">
+                <a class="nav-link explorer-buttons" onclick="explorer_back()"> < </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link explorer-buttons" onclick="explorer_forward()"> > </a>
+              </li>
+
+              <li class="nav-item">
+
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb" style="background-color: transparent;
+                  padding: 5px 17px;" id="explorer-navbar">
+                    <li class="breadcrumb-item active" id="navbar_0"> Databases </li>
+                    
+                  </ol>
+                </nav>
+
+              </li>
+              
+            </ul>
+
+          </div>
+
           <div class="card-body">
             
             <span id="explorer_container">
@@ -108,7 +148,7 @@
           <br />
           <br />
 
-          <div class="card">
+          <div class="card text-white bg-dark">
               
             <h5 class="card-header" id="editing_now">SQL > </h5>
 
@@ -122,7 +162,7 @@
 
                 </div>
 
-            <div class="card">
+            <div class="card text-white bg-dark">
                 <div class="card-header">
                   Console
                 </div>
