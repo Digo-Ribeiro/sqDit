@@ -22,6 +22,8 @@ async function start_server(){
 
     main_routes();
 
+    http.listen(port, ()=>{ console.log(`\x1b[32m [OK] \x1b[0m Server started at port: ${port}`) });
+
 };
 
 async function main_routes(){
@@ -71,6 +73,8 @@ async function main_routes(){
 
             if(db_response._err!=null){
                 socket.emit('db_error', db_response._err.code);
+            }else{
+                socket.emit('db_data', db_response._data);
             }
             
         });
@@ -86,5 +90,3 @@ async function main_routes(){
 start_server();
 
 // Console "BLINK = \x1b[5m "
-
-http.listen(port, ()=>{ console.log(`\x1b[32m [OK] \x1b[0m Server started at port: ${port}`) });
