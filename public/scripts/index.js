@@ -48,7 +48,7 @@ socket.on('db_tables', (_data)=>{
 });
 
 
-    socket.emit('show_db');
+socket.emit('show_db');
 
 
 socket.on('show_databases', (_data)=>{
@@ -58,7 +58,7 @@ socket.on('show_databases', (_data)=>{
     add_explorer();
 
     _data.forEach(item => {
-        add_data_explorer_items(item, `show_tables('${item}')`, 'db')
+        add_data_explorer_items(item, `db_select('${item}')`, 'db')
     });
 
 });
@@ -179,16 +179,28 @@ const describe_table = (_id) =>{
 
 //Data-Explorer
 
-const explorer_navbar_index = 0;
-const actual_index = 0;
+/*
+let nav_now = null;
 
-const navbar_info_index = (_str /*: string*/, _index /*: integer */) => {
-    getID(`navbar_${(_index)}`).className = 'breadcrumb-item';
-    let elem_code = `<li class="breadcrumb-item active" id="navbar_${_index}"> ${_str} </li>`;
+const navbar_info_index = (_str : string) => {
+    let elem_code = `<li class="breadcrumb-item active" onclick="${_func}" id="navbar_${_str}"> ${_str} </li>`;
     getID('explorer-navbar').insertAdjacentHTML('beforeend', elem_code);
 };
 
-const show_tables = (_str) => {
-    navbar_info_index('Tables', actual_index);
-    db_select(_str)
+const change_nav = (_name, _type) => {
+
+    if(_type=='db'){
+        nav_now = null;
+        getID('explorer-navbar').remove();
+    }
+    
+    if(_type=='table'){
+        nav_now = _type;
+        db_select(_name)
+        navbar_info_index(_name, "socket.emit('show_db');");
+    }
+
 };
+*/
+
+//hierarchy db/tables
